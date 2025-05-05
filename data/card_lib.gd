@@ -47,13 +47,20 @@ static func get_number(global_number:int) -> int:
 	return CardData.NUMBER[global_number]
 
 static func get_path_to_art(global_number:int) -> String:
-	#return "res://backing.jpg" # Sometimes I just feel not having cards, got a problem with that?
+	#return "res://backing.jpg" # Sometimes I just feel like not having cards, got a problem with that?
 	if global_number == -1:
 		return "res://IndicationLabelL.png"
 	# GRRRR...!!! BRATTY WEB EXPORTED .PCK FILE SIZE...!!! NEEDS CORRECTION !!!
+	var folder_name := 'cards_small'
 	if OS.has_feature("web"):
-		return "res://cards_small/%s.jpg" % CardData.ART[global_number]
-	return "res://cards/%s.jpg" % CardData.ART[global_number]
+		folder_name = 'cards_small'
+		#return "res://cards_small/%s.jpg" % CardData.ART[global_number]
+	## True-quality cards, which are too big for Web Export
+	## Didn't want to pad the Github repo with them either, since they technically aren't used.
+	elif DirAccess.dir_exists_absolute('res://cards/'):
+		folder_name = 'cards'
+		#return "res://cards/%s.jpg" % CardData.ART[global_number]
+	return "res://%s/%s.jpg" % [ folder_name, CardData.ART[global_number] ]
 
 static func get_path_to_small_icon(global_number:int) -> String:
 	if global_number == -1:
