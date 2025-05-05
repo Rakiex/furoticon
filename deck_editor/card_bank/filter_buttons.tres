@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://n6dj78hvtckv"]
+
+[ext_resource type="Texture2D" uid="uid://c0ngha8xao271" path="res://border.png" id="1_00q63"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ap06m"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ow5mx"]
+texture = ExtResource("1_00q63")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iagpd"]
+bg_color = Color(0.6, 0.6, 0.6, 0.784314)
+
+[resource]
+Button/styles/focus = SubResource("StyleBoxEmpty_ap06m")
+Button/styles/hover = SubResource("StyleBoxTexture_ow5mx")
+Button/styles/normal = SubResource("StyleBoxFlat_iagpd")

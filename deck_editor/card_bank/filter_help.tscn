@@ -1,0 +1,348 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2mfs1p8piec6"]
+
+[ext_resource type="PackedScene" uid="uid://n7i4ny7kw54r" path="res://deck_editor/card_bank/filter.tscn" id="1_0cgtb"]
+[ext_resource type="Texture2D" uid="uid://dbxbojueoo57q" path="res://atlus.jpg" id="2_ve0or"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06p00"]
+atlas = ExtResource("2_ve0or")
+region = Rect2(0, 0, 45, 63)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.941176)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 485.0
+offset_right = -59.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "To filter the cards in the bank, type some shit into that text input box under the button you clicked to see this menu. Below are some examples of the kind of \"key\" you'll have to start the filter with to get the desired result. Filters are seperated by spaces. Don't put spaces between phrases that you want in one filter, use underscore or just omit the space instead."
+
+[node name="Alpha" type="Control" parent="ColorRect"]
+anchors_preset = 0
+offset_top = 208.0
+offset_right = 522.0
+offset_bottom = 646.0
+
+[node name="info" type="RichTextLabel" parent="ColorRect/Alpha"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 69.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "[center]ALPHABETICAL FILTERS
+Matches cards that contain the text within a certain property[/center]
+
+"
+
+[node name="columns" type="HBoxContainer" parent="ColorRect/Alpha"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.109
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 24.258
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="key" type="RichTextLabel" parent="ColorRect/Alpha/columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]KEY
+~~~
+                c (default)
+a
+t
+d
+g
+s
+f
+e
+r"
+
+[node name="property" type="RichTextLabel" parent="ColorRect/Alpha/columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]PROPERTY
+~~~~~~~~
+Card Name
+Artist Name
+Type
+Defining Types
+Gender (Border color)
+Skill Text
+Flavor Text
+Edition
+Rarity"
+
+[node name="example" type="RichTextLabel" parent="ColorRect/Alpha/columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]FILTER EXAMPLE
+~~~~~~~~
+Spitting Kitty
+Bittenhard
+Action
+Surprise
+herm
+Eager
+\"Mrff!\"
+tribesoftangle
+Starter"
+
+[node name="Numer" type="Control" parent="ColorRect"]
+anchors_preset = 0
+offset_left = 553.0
+offset_top = 209.0
+offset_right = 1150.0
+offset_bottom = 646.0
+
+[node name="info" type="RichTextLabel" parent="ColorRect/Numer"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 69.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "[center]NUMERICAL FILTERS
+Matches cards that succeed the comparison with a certain property[/center]
+
+"
+
+[node name="columns" type="HBoxContainer" parent="ColorRect/Numer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.109
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 20.367
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="key" type="RichTextLabel" parent="ColorRect/Numer/columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]KEY
+~~~
+n
+gn
+ac
+mc
+fc
+hc
+oc
+sp
+mp
+fp
+hp
+op
+en
+rn"
+
+[node name="property" type="RichTextLabel" parent="ColorRect/Numer/columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]PROPERTY
+~~~~~~~~
+Number (within edition)
+Global Number
+Action Point Cost
+Male GP Cost
+Female GP Cost
+Herm GP Cost
+Otherkin GP Cost
+Stamina
+Male PE
+Female PE
+Herm PE
+Otherkin PE
+Edition Index
+Rarity Index"
+
+[node name="example" type="RichTextLabel" parent="ColorRect/Numer/columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]EXAMPLE
+~~~~~~~~
+n=5
+g<50
+a>4
+m<=10
+f>=10
+h=<10
+o=>10
+
+so on, so forth..."
+
+[node name="+" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 54.0
+offset_top = 8.0
+offset_right = -30.0
+offset_bottom = -444.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "This box determines how the filter applies, when considering all filters.
+[color=red]+[/color] is the default, which means the filter returns all cards that match it (as you'd expect a filter to do).
+                                                                                                   |
+                                                                                              <--|
+                                                                                                   |
+                                                                                                   |
+                                                                                              <--|
+                                                                                                   v"
+
+[node name="-" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 54.0
+offset_top = 72.0
+offset_right = -715.0
+offset_bottom = -515.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Use [color=red]-[/color] to filter out cards that match the condition.
+-m=2 (Returns cards that don't cost 2 Male GP) "
+scroll_active = false
+horizontal_alignment = 2
+
+[node name="~" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = 129.0
+offset_right = -719.0
+offset_bottom = -463.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Use [color=red]~[/color]  if you only need one such filter to succeed.
+~f=1 ~h=3 (Returns cards that cost 1 FGP, and/or 3 HGP)"
+horizontal_alignment = 2
+
+[node name="Key" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 492.0
+offset_top = 60.0
+offset_right = -13.0
+offset_bottom = -446.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Enter the 'key' for the property you are filtering for here.
+The keys are listed below, with corresponding properties.
+Numeric keys will cause an \"operator box\" to appear, put any of [color=red]= < > =< =>[/color] there.
+|
+|
+v"
+scroll_active = false
+
+[node name="Property" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 524.0
+offset_top = 149.0
+offset_right = -190.0
+offset_bottom = -430.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Enter whatever it is you are filtering for here.
+v"
+scroll_active = false
+
+[node name="Filter" parent="ColorRect" instance=ExtResource("1_0cgtb")]
+offset_left = 458.0
+offset_top = 198.0
+offset_right = 658.0
+offset_bottom = 233.0
+metadata/_edit_group_ = true
+
+[node name="Blocker" type="Control" parent="ColorRect/Filter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 560.0
+offset_right = 101.0
+offset_bottom = 623.0
+texture = SubResource("AtlasTexture_06p00")
+
+[node name="+2" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 110.0
+offset_top = 555.0
+offset_right = -548.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Also, you can click a property on the big-card-view-thing to the left of the deck editor area to create a filter based on that, which may be handy if you need an example.
+(Clickable areas may be rather misaligned at the moment)"
+scroll_active = false
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+metadata/_edit_lock_ = true

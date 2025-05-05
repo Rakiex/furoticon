@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://dbnpii6vux4ie"]
+
+[node name="ImportHelp" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.941176)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 156.0
+offset_right = 1114.0
+offset_bottom = 507.0
+color = Color(0.118581, 0.118581, 0.118581, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 16.0
+offset_right = 1018.0
+offset_bottom = 348.0
+bbcode_enabled = true
+text = "[color=darkgray]Type,Cards,,,,,,,,,,Cost,,Furre Stats,,,,,Owner Stats,,,,,,,,[/color] (The text on this line doesn't matter, but there does need to be a line here)
+[color=pink]Mini,20/20,[/color],,,,,,,,,,,,PE,,,,Top,,,,Bottom,,,,                            (Only the [color=pink]Mini,20/20,[/color] part matters)
+[color=darkgray]Qty,Max,Card Name,Global Num(s),Edi... [/color]                       (The text on this line doesn't matter, but there does need to be a line here)
+[color=pink]1,1,Fel Onin,\"N/A, 848\",[/color]\"Triskelion, Di'Ahla's...              (Only [color=pink]1,1,Fel Onin,\"N/A, 848\",[/color] matters, the same is true for all card rows.)
+[color=darkgray]Qty,Max,Card Name,Global Num(s),Edition(s),etc...[/color]     (The text on this line doesn't matter, but there does need to be a line here)
+[color=pink]1,3,All Mine,\"287, 723\",[/color]\"Triskelion,Strawberry 3rd Vanilla\",FO,8,Action,1,,0,8,FFO,-,-,-,-,-,-,-,-,-,-,-,-,-,Gain control of all Alterations...
+[color=pink]2,3,Berbau,1185,[/color]Brundali Rail Heist,H,2,Furre,0,Caracal,7,12,HHH,10,10,8,8,5,-,-,-,-,-,-,-,-,Kink — Unique Furre types.
+[color=pink]3,3,Carriage Horse,\"7, 314\",[/color]\"1st Vanilla,2nd Vanilla\",M,0,Furre,0,Horse,5,6,M,5,3,2,4,3,-,-,-,-,-,-,-,-,Get :m: during your refill step.
+[color=pink]2,3,Mei Dora,805,[/color]Di'Ahla's Awakening,H,2,Furre,0,Pika,4,4,HHH,10,4,4,4,4,-,-,-,-,-,-,-,-,\"Masochist, Sadist 2. Mei Dora gives hirself...
+[color=pink]1,3,Wingman Truku,1151,[/color]Brundali Rail Heist,M,0,Furre,0,Elk,3,8,MM,10,3,6,2,4,-,-,-,-,-,-,-,-,\"Meddler. When a Renegade Furre...
+[color=pink]2,3,Yuswan,1237,[/color]Brundali Rail Heist,O,3,Furre,0,Naga,4,10,O,5,2,2,4,2,-,-,-,-,-,-,-,-,\"Relaxed. :1:, Yuswan gets -1 :sp:: Target...
+[color=pink]3,3,Zyla,279,[/color]Triskelion,O,3,Furre,0,\"Unicorn,Horse\",13,8,OO,15,3,3,3,3,-,-,-,-,-,-,-,-,Bondage-lover. Zyla gets +1 to all PEs for...
+[color=pink]3,None,Moorlands,\"172, 173, 302, 303, 434, 435, 579, 580, 581, 737, 738, 842, 1008, 1114, 1259, 1349, 1455\",[/color]\"1st Vanilla...
+[color=pink]3,None,Outskirts,\"178, 179, 308, 309, 440, 441, 588, 589, 590, 743, 744, 845, 1011, 1117, 1262, 1352, 1458\",[/color]\"1st Vanilla..."
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 369.0
+offset_top = 86.0
+offset_right = 761.0
+offset_bottom = 135.0
+text = "The file should look something like this!
+(Except the highlighting, that's here for emphasis)"
+horizontal_alignment = 1
+
+[node name="LeaveExample" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+metadata/_edit_lock_ = true

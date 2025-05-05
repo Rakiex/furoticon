@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=3 uid="uid://le7mi6e1gvps"]
+
+[ext_resource type="LabelSettings" uid="uid://pf0eb6aywlnv" path="res://theme/label.tres" id="2_v86l0"]
+
+[node name="PreconPlate" type="Control"]
+custom_minimum_size = Vector2(278, 120)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Other2" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 200.0
+offset_top = 25.0
+offset_right = 260.0
+offset_bottom = 109.0
+expand_mode = 1
+
+[node name="Other1" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 25.0
+offset_right = 80.0
+offset_bottom = 109.0
+expand_mode = 1
+
+[node name="Furre2" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 155.0
+offset_top = 36.0
+offset_right = 215.0
+offset_bottom = 120.0
+expand_mode = 1
+
+[node name="Furre1" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 65.0
+offset_top = 36.0
+offset_right = 125.0
+offset_bottom = 120.0
+expand_mode = 1
+
+[node name="Owner" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 110.0
+offset_top = 15.0
+offset_right = 170.0
+offset_bottom = 99.0
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -139.0
+offset_right = 139.0
+offset_bottom = 23.0
+grow_horizontal = 2
+label_settings = ExtResource("2_v86l0")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true

@@ -1,0 +1,120 @@
+[gd_scene load_steps=10 format=3 uid="uid://dr4i2ysmbehj4"]
+
+[ext_resource type="Texture2D" uid="uid://dfgq0icplko8e" path="res://menu.png" id="1_e16y7"]
+[ext_resource type="Script" uid="uid://61pakekmtusw" path="res://deck_editor/load.gd" id="1_jsqrc"]
+[ext_resource type="Texture2D" uid="uid://cgd0fn7rsifvy" path="res://buttonH.png" id="2_jsqrc"]
+[ext_resource type="LabelSettings" uid="uid://csifwbsxnq3b0" path="res://deck_editor/label.tres" id="3_70rgv"]
+[ext_resource type="Texture2D" uid="uid://ctnqx30f536bd" path="res://buttonD.png" id="3_by7en"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xw0kw"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_glh52"]
+texture = ExtResource("2_jsqrc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tcblo"]
+texture = ExtResource("2_jsqrc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aws4q"]
+texture = ExtResource("3_by7en")
+
+[node name="Load" type="NinePatchRect"]
+texture_filter = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 322.0
+offset_bottom = 190.0
+mouse_filter = 0
+texture = ExtResource("1_e16y7")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+script = ExtResource("1_jsqrc")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -31.0
+offset_top = 10.0
+offset_right = 31.0
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "LOAD/IMPORT"
+label_settings = ExtResource("3_70rgv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -86.5
+offset_top = 36.0
+offset_right = 87.5
+offset_bottom = 113.0
+grow_horizontal = 2
+
+[node name="CSV" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+tooltip_text = "To get a compatable .csv file:
+* From the 'Furo Deck Builder' Google Spreadsheet: Do 'File->Download->Comma Seperated Values (.csv)
+* If exporting the .csv from Excel/LibreCalc/Whatever, make sure it's set to comma as the seperator and mandatory quotes around strings!
+Right-Click this button to see an example of what the .csv should look like when opened in a text editor."
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xw0kw")
+theme_override_styles/hover = SubResource("StyleBoxTexture_glh52")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tcblo")
+theme_override_styles/normal = SubResource("StyleBoxTexture_aws4q")
+action_mode = 0
+button_mask = 3
+text = "Spreadsheet .csv"
+
+[node name="JSON" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xw0kw")
+theme_override_styles/hover = SubResource("StyleBoxTexture_glh52")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tcblo")
+theme_override_styles/normal = SubResource("StyleBoxTexture_aws4q")
+action_mode = 0
+button_mask = 3
+text = "Deck Editor .json"
+
+[node name="Precon" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xw0kw")
+theme_override_styles/hover = SubResource("StyleBoxTexture_glh52")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tcblo")
+theme_override_styles/normal = SubResource("StyleBoxTexture_aws4q")
+action_mode = 0
+button_mask = 3
+text = "Precon"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -137.0
+offset_top = -28.0
+offset_right = 137.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "...or, drag the file onto the screen!"
+label_settings = ExtResource("3_70rgv")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/CSV" to="." method="_press_csv"]
+[connection signal="pressed" from="VBoxContainer/JSON" to="." method="_press_json"]
+[connection signal="pressed" from="VBoxContainer/Precon" to="." method="_press_precon"]
