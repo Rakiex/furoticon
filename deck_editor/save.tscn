@@ -1,0 +1,194 @@
+[gd_scene load_steps=11 format=3 uid="uid://dke7jc2rk2pfk"]
+
+[ext_resource type="Texture2D" uid="uid://dfgq0icplko8e" path="res://menu.png" id="1_puuu8"]
+[ext_resource type="Script" uid="uid://cvv2tjgadjsmg" path="res://deck_editor/save.gd" id="2_puuu8"]
+[ext_resource type="LabelSettings" uid="uid://csifwbsxnq3b0" path="res://deck_editor/label.tres" id="3_uts0m"]
+[ext_resource type="Texture2D" uid="uid://cgd0fn7rsifvy" path="res://buttonH.png" id="4_flvsq"]
+[ext_resource type="Texture2D" uid="uid://ctnqx30f536bd" path="res://buttonD.png" id="5_t0vcr"]
+[ext_resource type="PackedScene" uid="uid://dty0g66hktuqv" path="res://deck_editor/export_progress.tscn" id="6_vsn5v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xw0kw"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_glh52"]
+texture = ExtResource("4_flvsq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tcblo"]
+texture = ExtResource("4_flvsq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aws4q"]
+texture = ExtResource("5_t0vcr")
+
+[node name="Save" type="NinePatchRect"]
+texture_filter = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 322.0
+offset_bottom = 245.0
+mouse_filter = 0
+texture = ExtResource("1_puuu8")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+script = ExtResource("2_puuu8")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -31.0
+offset_top = 10.0
+offset_right = 31.0
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "SAVE/EXPORT"
+label_settings = ExtResource("3_uts0m")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -86.5
+offset_top = 36.0
+offset_right = 87.5
+offset_bottom = 113.0
+grow_horizontal = 2
+
+[node name="Image" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="PNG" type="Button" parent="VBoxContainer/Image"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 0
+offset_right = 127.0
+offset_bottom = 30.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xw0kw")
+theme_override_styles/hover = SubResource("StyleBoxTexture_glh52")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tcblo")
+theme_override_styles/normal = SubResource("StyleBoxTexture_aws4q")
+action_mode = 0
+button_mask = 3
+text = "Image: .png"
+
+[node name="JPG" type="Button" parent="VBoxContainer/Image"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -47.0
+offset_bottom = 30.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xw0kw")
+theme_override_styles/hover = SubResource("StyleBoxTexture_glh52")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tcblo")
+theme_override_styles/normal = SubResource("StyleBoxTexture_aws4q")
+action_mode = 0
+button_mask = 3
+text = ".jpg"
+
+[node name="Progress" parent="VBoxContainer/Image" instance=ExtResource("6_vsn5v")]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -15.0
+offset_right = 0.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="JSON" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xw0kw")
+theme_override_styles/hover = SubResource("StyleBoxTexture_glh52")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tcblo")
+theme_override_styles/normal = SubResource("StyleBoxTexture_aws4q")
+action_mode = 0
+button_mask = 3
+text = "Deck Editor .json"
+
+[node name="JSON2" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -87.0
+offset_top = -103.0
+offset_right = 87.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xw0kw")
+theme_override_styles/hover = SubResource("StyleBoxTexture_glh52")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tcblo")
+theme_override_styles/normal = SubResource("StyleBoxTexture_aws4q")
+disabled = true
+action_mode = 0
+button_mask = 3
+text = "Tabletop Sim .json"
+
+[node name="Front" type="LineEdit" parent="JSON2"]
+layout_mode = 2
+offset_top = 30.0
+offset_right = 174.0
+offset_bottom = 61.0
+placeholder_text = "TTS .json Image URL"
+
+[node name="Label" type="Label" parent="JSON2/Front"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -11.5
+offset_right = -7.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = "Fronts"
+label_settings = ExtResource("3_uts0m")
+horizontal_alignment = 2
+
+[node name="Back" type="LineEdit" parent="JSON2"]
+layout_mode = 2
+offset_top = 61.0
+offset_right = 174.0
+offset_bottom = 92.0
+placeholder_text = "http://i.imgur.com/dR21fvu.jpg"
+
+[node name="Label" type="Label" parent="JSON2/Back"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -11.5
+offset_right = -10.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = "Back"
+label_settings = ExtResource("3_uts0m")
+horizontal_alignment = 2
+
+[connection signal="pressed" from="VBoxContainer/Image/PNG" to="." method="_press_png"]
+[connection signal="pressed" from="VBoxContainer/Image/JPG" to="." method="_press_jpg"]
+[connection signal="pressed" from="VBoxContainer/JSON" to="." method="_press_json"]
+[connection signal="pressed" from="JSON2" to="." method="_press_tts_json"]
+[connection signal="text_changed" from="JSON2/Front" to="." method="_on_front_text_changed"]

@@ -1,0 +1,82 @@
+{
+	"ActionCost": {
+		"Pos": "(234.0, 22.0)",
+		"Show": true,
+		"Size": "(20.0, 20.0)"
+	},
+	"Artist": {
+		"Pos": "(43.0, 364.0)",
+		"Show": true,
+		"Size": "(107.0, 20.0)"
+	},
+	"Define": {
+		"Pos": "(71.0, 251.0)",
+		"Show": true,
+		"Size": "(50.0, 20.0)"
+	},
+	"Edition": {
+		"Pos": "(255.0, 252.0)",
+		"Show": true,
+		"Size": "(19.0, 20.0)"
+	},
+	"FemalePE": {
+		"Pos": "(1.0, 67.0)",
+		"Show": true,
+		"Size": "(41.0, 20.0)"
+	},
+	"Flavor": {
+		"Pos": "(26.0, 332.0)",
+		"Show": true,
+		"Size": "(247.0, 19.0)"
+	},
+	"Furre": {
+		"Pos": "(15.0, 56.0)",
+		"Show": true,
+		"Size": "(47.0, 148.0)"
+	},
+	"HermPE": {
+		"Pos": "(1.0, 95.0)",
+		"Show": true,
+		"Size": "(41.0, 20.0)"
+	},
+	"MaleCost": {
+		"Pos": "(254.0, 22.0)",
+		"Show": true,
+		"Size": "(20.0, 20.0)"
+	},
+	"MalePE": {
+		"Pos": "(1.0, 39.0)",
+		"Show": true,
+		"Size": "(41.0, 20.0)"
+	},
+	"Name": {
+		"Pos": "(25.0, 23.0)",
+		"Show": true,
+		"Size": "(169.0, 20.0)"
+	},
+	"Number": {
+		"Pos": "(245.0, 367.0)",
+		"Show": true,
+		"Size": "(29.0, 10.0)"
+	},
+	"OtherkinPE": {
+		"Pos": "(1.0, 123.0)",
+		"Show": true,
+		"Size": "(41.0, 20.0)"
+	},
+	"Skill": {
+		"Pos": "(26.0, 283.0)",
+		"Show": true,
+		"Size": "(247.0, 47.0)"
+	},
+	"Stamina": {
+		"Pos": "(1.0, 4.0)",
+		"Show": true,
+		"Size": "(41.0, 20.0)"
+	},
+	"Type": {
+		"Pos": "(25.0, 250.0)",
+		"Show": true,
+		"Size": "(41.0, 20.0)"
+	}
+}

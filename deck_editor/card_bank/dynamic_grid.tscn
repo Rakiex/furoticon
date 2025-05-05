@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://3ctdcoflt8r0"]
+
+[ext_resource type="Script" uid="uid://iflmnbfs1062" path="res://deck_editor/card_bank/dynamic_grid.gd" id="1_i484n"]
+
+[node name="DynamicGrid" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 270.0
+offset_bottom = 63.0
+script = ExtResource("1_i484n")
+
+[node name="Scroll" type="VScrollBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+page = 1.0
+
+[node name="Clip" type="ColorRect" parent="."]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Grid" type="GridContainer" parent="Clip"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 6
+
+[connection signal="gui_input" from="." to="." method="_gui_input"]
+[connection signal="value_changed" from="Scroll" to="." method="_scroll_value_change"]
