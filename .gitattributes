@@ -1,2 +1,7 @@
 # Normalize EOL for all files that Git considers text files.
-* text=auto eol=lf
+*.gd text=auto eol=lf
+*.txt text=auto eol=lf
+*.json text=auto eol=lf
+*.tscn text=auto eol=lf
+*.cfg text=auto eol=lf
+*.md text=auto eol=lf
