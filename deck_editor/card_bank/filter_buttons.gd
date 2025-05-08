@@ -92,8 +92,9 @@ func set_global(g):
 	
 	if not CardLib.has_cost(global):
 		$ActionCost.hide()
-		$MaleCost.hide()
+		$GenderCost.hide()
 	else:
+		$GenderCost.show()
 		## "1st Vanilla" cards have the Name on the same line as the variable-length AP/GP Costs.
 		if edition == 0:
 			$Name.size.x = CardLib.get_card_name(global).length() * 7.0

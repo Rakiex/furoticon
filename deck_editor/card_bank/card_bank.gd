@@ -29,7 +29,7 @@ var FILTERS = {
 	'c': [CardLib.get_card_name, FilterType.ALPHABETIC, null], # (C)ard Name 
 	't': [CardLib.get_type_string, FilterType.ALPHABETIC, null], # (T)ype
 	's': [CardLib.get_skill_string, FilterType.ALPHABETIC, null], # (S)kill Text
-	'f': [CardLib.get_flavor, FilterType.ALPHABETIC, null], # (F)lavor Text
+	'f': [CardLib.get_flavor, FilterType.ALPHABETIC, CardLib.has_flavor], # (F)lavor Text
 	'e': [CardLib.get_edition_string, FilterType.ALPHABETIC, null], # (E)dition
 	'r': [CardLib.get_rarity_string, FilterType.ALPHABETIC, null], # (R)arity
 	'g': [CardLib.get_gender_string, FilterType.ALPHABETIC, null], # (G)ender

@@ -27,6 +27,9 @@ static func has_defines(global_number:int) -> bool:
 static func has_define(global_number:int, define:int) -> bool:
 	return CardData.BASE_DEFINE[CardData.CARD_BASE[global_number]].has(define)
 
+static func has_flavor(global_number:int) -> bool:
+	return CardData.CARD_FLAVOR[global_number] != ''
+
 # .............................................................................
 # .............................................................................
 
