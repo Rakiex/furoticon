@@ -1,127 +1,132 @@
 {
 	"ActionCost": {
-		"Pos": "(263.0, 11.0)",
-		"Show": false,
+		"Pos": "(253.0, 22.0)",
+		"Show": true,
 		"Size": "(25.0, 25.0)"
 	},
 	"Artist": {
-		"Pos": "(11.0, 373.0)",
+		"Pos": "(18.0, 363.0)",
 		"Show": true,
-		"Size": "(254.0, 27.0)"
+		"Size": "(238.0, 26.0)"
 	},
 	"DeckBonus": {
 		"Pos": "(1.0, 4.0)",
-		"Show": true,
+		"Show": false,
 		"Size": "(123.0, 14.0)"
 	},
 	"Define": {
-		"Pos": "(49.0, 37.0)",
-		"Show": false,
+		"Pos": "(58.0, 46.0)",
+		"Show": true,
 		"Size": "(49.0, 14.0)"
 	},
 	"DrawAction": {
 		"Pos": "(146.0, 3.0)",
-		"Show": true,
+		"Show": false,
 		"Size": "(112.0, 14.0)"
 	},
 	"Edition": {
-		"Pos": "(271.0, 384.0)",
+		"Pos": "(263.0, 371.0)",
 		"Show": true,
 		"Size": "(19.0, 20.0)"
 	},
 	"FemalePE": {
-		"Pos": "(1.0, 54.0)",
+		"Pos": "(9.0, 60.0)",
 		"Show": true,
-		"Size": "(52.0, 27.0)"
+		"Size": "(42.0, 19.0)"
 	},
 	"Flavor": {
-		"Pos": "(62.0, 327.0)",
-		"Show": false,
-		"Size": "(217.0, 42.0)"
+		"Pos": "(63.0, 323.0)",
+		"Show": true,
+		"Size": "(208.0, 38.0)"
 	},
 	"Furre": {
 		"Pos": "(8.0, 237.0)",
-		"Show": false,
+		"Show": true,
 		"Size": "(54.0, 134.0)"
 	},
 	"GenderCost": {
-		"Pos": "(272.0, 38.0)",
-		"Show": false,
+		"Pos": "(262.0, 48.0)",
+		"Show": true,
 		"Size": "(15.0, 17.0)"
 	},
+	"Genders": {
+		"Pos": "(178.0, -231.0)",
+		"Show": false,
+		"Size": "(79.0, 16.0)"
+	},
 	"HermPE": {
-		"Pos": "(1.0, 82.0)",
+		"Pos": "(10.0, 82.0)",
 		"Show": true,
-		"Size": "(51.0, 24.0)"
+		"Size": "(41.0, 18.0)"
 	},
 	"MalePE": {
-		"Pos": "(1.0, 29.0)",
+		"Pos": "(9.0, 38.0)",
 		"Show": true,
-		"Size": "(52.0, 24.0)"
+		"Size": "(42.0, 19.0)"
 	},
 	"MaxHand": {
 		"Pos": "(-1.0, 58.0)",
-		"Show": true,
+		"Show": false,
 		"Size": "(128.0, 14.0)"
 	},
 	"MaxStamina": {
 		"Pos": "(65.0, -15.0)",
-		"Show": true,
+		"Show": false,
 		"Size": "(58.0, 14.0)"
 	},
 	"Name": {
-		"Pos": "(12.0, 10.0)",
+		"Pos": "(20.0, 22.0)",
 		"Show": true,
-		"Size": "(225.0, 20.0)"
+		"Size": "(216.0, 20.0)"
 	},
 	"Number": {
-		"Pos": "(282.0, 404.0)",
+		"Pos": "(245.0, 392.0)",
 		"Show": true,
-		"Size": "(10.0, 9.0)"
+		"Size": "(37.0, 8.0)"
 	},
 	"OtherkinPE": {
-		"Pos": "(1.0, 107.0)",
+		"Pos": "(9.0, 103.0)",
 		"Show": true,
-		"Size": "(51.0, 27.0)"
+		"Size": "(42.0, 19.0)"
 	},
 	"Owner": {
 		"Pos": "(23.0, 279.0)",
-		"Show": true,
+		"Show": false,
 		"Size": "(255.0, 79.0)"
 	},
 	"PutAction": {
 		"Pos": "(169.0, 60.0)",
-		"Show": true,
+		"Show": false,
 		"Size": "(88.0, 14.0)"
 	},
 	"Skill": {
-		"Pos": "(62.0, 244.0)",
-		"Show": false,
-		"Size": "(218.0, 81.0)"
+		"Pos": "(63.0, 252.0)",
+		"Show": true,
+		"Size": "(208.0, 71.0)"
 	},
 	"Stamina": {
-		"Pos": "(1.0, 2.0)",
+		"Pos": "(9.0, 14.0)",
 		"Show": true,
-		"Size": "(52.0, 26.0)"
+		"Size": "(42.0, 21.0)"
 	},
 	"StartHand": {
 		"Pos": "(7.0, 23.0)",
-		"Show": true,
+		"Show": false,
 		"Size": "(123.0, 14.0)"
 	},
 	"SwingAction": {
 		"Pos": "(177.0, 42.0)",
-		"Show": true,
+		"Show": false,
 		"Size": "(81.0, 14.0)"
 	},
 	"TurnAction": {
 		"Pos": "(177.0, -15.0)",
-		"Show": true,
+		"Show": false,
 		"Size": "(79.0, 14.0)"
 	},
 	"Type": {
-		"Pos": "(15.0, 37.0)",
+		"Pos": "(23.0, 46.0)",
 		"Show": true,
-		"Size": "(38.0, 14.0)"
+		"Size": "(29.0, 14.0)"
 	}
 }

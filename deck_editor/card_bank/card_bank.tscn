@@ -82,4 +82,4 @@ text = "1500"
 label_settings = ExtResource("6_0lu4l")
 horizontal_alignment = 1
 
-[connection signal="pressed" from="FilterHelp" to="." method="_on_filter_help_pressed"]
+[connection signal="pressed" from="FilterHelp" to="." method="_press_help"]

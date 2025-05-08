@@ -9,10 +9,20 @@
 		"Show": true,
 		"Size": "(258.0, 32.0)"
 	},
+	"DeckBonus": {
+		"Pos": "(8.0, 18.0)",
+		"Show": false,
+		"Size": "(123.0, 14.0)"
+	},
 	"Define": {
 		"Pos": "(49.0, 37.0)",
 		"Show": true,
 		"Size": "(49.0, 14.0)"
+	},
+	"DrawAction": {
+		"Pos": "(139.0, 18.0)",
+		"Show": false,
+		"Size": "(112.0, 14.0)"
 	},
 	"Edition": {
 		"Pos": "(271.0, 384.0)",
@@ -25,29 +35,44 @@
 		"Size": "(52.0, 27.0)"
 	},
 	"Flavor": {
-		"Pos": "(62.0, 327.0)",
+		"Pos": "(62.0, 313.0)",
 		"Show": true,
-		"Size": "(217.0, 42.0)"
+		"Size": "(217.0, 56.0)"
 	},
 	"Furre": {
 		"Pos": "(8.0, 237.0)",
 		"Show": true,
 		"Size": "(54.0, 134.0)"
 	},
+	"GenderCost": {
+		"Pos": "(272.0, 38.0)",
+		"Show": true,
+		"Size": "(15.0, 17.0)"
+	},
+	"Genders": {
+		"Pos": "(178.0, -231.0)",
+		"Show": false,
+		"Size": "(79.0, 16.0)"
+	},
 	"HermPE": {
 		"Pos": "(1.0, 82.0)",
 		"Show": true,
 		"Size": "(51.0, 24.0)"
 	},
-	"MaleCost": {
-		"Pos": "(272.0, 38.0)",
-		"Show": true,
-		"Size": "(15.0, 17.0)"
-	},
 	"MalePE": {
 		"Pos": "(1.0, 29.0)",
 		"Show": true,
 		"Size": "(52.0, 24.0)"
+	},
+	"MaxHand": {
+		"Pos": "(3.0, 58.0)",
+		"Show": false,
+		"Size": "(128.0, 14.0)"
+	},
+	"MaxStamina": {
+		"Pos": "(73.0, 4.0)",
+		"Show": false,
+		"Size": "(58.0, 14.0)"
 	},
 	"Name": {
 		"Pos": "(12.0, 11.0)",
@@ -64,15 +89,40 @@
 		"Show": true,
 		"Size": "(51.0, 27.0)"
 	},
+	"Owner": {
+		"Pos": "(23.0, 279.0)",
+		"Show": false,
+		"Size": "(255.0, 79.0)"
+	},
+	"PutAction": {
+		"Pos": "(163.0, 60.0)",
+		"Show": false,
+		"Size": "(88.0, 14.0)"
+	},
 	"Skill": {
-		"Pos": "(62.0, 244.0)",
+		"Pos": "(62.0, 313.0)",
 		"Show": true,
-		"Size": "(218.0, 81.0)"
+		"Size": "(218.0, 57.0)"
 	},
 	"Stamina": {
 		"Pos": "(1.0, 2.0)",
 		"Show": true,
 		"Size": "(52.0, 26.0)"
+	},
+	"StartHand": {
+		"Pos": "(8.0, 32.0)",
+		"Show": false,
+		"Size": "(123.0, 14.0)"
+	},
+	"SwingAction": {
+		"Pos": "(170.0, 46.0)",
+		"Show": false,
+		"Size": "(81.0, 14.0)"
+	},
+	"TurnAction": {
+		"Pos": "(172.0, 4.0)",
+		"Show": false,
+		"Size": "(79.0, 14.0)"
 	},
 	"Type": {
 		"Pos": "(15.0, 37.0)",

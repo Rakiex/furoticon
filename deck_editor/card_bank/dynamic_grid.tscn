@@ -41,5 +41,4 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 6
 
-[connection signal="gui_input" from="." to="." method="_gui_input"]
 [connection signal="value_changed" from="Scroll" to="." method="_scroll_value_change"]

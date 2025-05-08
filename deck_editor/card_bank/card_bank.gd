@@ -1,6 +1,13 @@
 extends Control
 
 
+enum FilterType {
+	ALPHABETIC,
+	ALPHABETIC_LIST,
+	NUMERIC,
+	CUSTOM
+}
+
 const FIRST_CARD := 1
 const LAST_CARD := 1500 + 1
 
@@ -11,86 +18,102 @@ var filters = {}
 @export var deck :Node = null
 
 
-# Capture [k:glyph v:text]
-## Text-Based filters
-const REGEX_ALPHABET_PATTERN := "(^(?<k>[-~]?%s):(?<v>.*)$)"
-const REGEX_ALPHABET_GLYPHS :Array = [
-	"c", # (C)ard (N)ame // (?=:.) would prevent filter until there is an actual value
-	"a", # (A)rtist Name
-	"s", # (S)kill Text
-	"f", # (F)lavor Text
+var FILTERS = {
 	#"k", # (K)eyword Skills
-	"t", # (T)ype
-	"d", # (D)efining Types
-	"g", # (G)ender
 	#"gp", # (G)ender (P)oint Cost
-	"e", # (E)dition
-	"r" # (R)arity
-	]
+	# For group values...<Any> <All> <Only One>,<Total>
+	# Numeric comparisons (Greater/Less than) for things like Rarity, Edition...
+	
+	'gn': [func(i):return i, FilterType.NUMERIC, null],
+	
+	'c': [CardLib.get_card_name, FilterType.ALPHABETIC, null], # (C)ard Name 
+	't': [CardLib.get_type_string, FilterType.ALPHABETIC, null], # (T)ype
+	's': [CardLib.get_skill_string, FilterType.ALPHABETIC, null], # (S)kill Text
+	'f': [CardLib.get_flavor, FilterType.ALPHABETIC, null], # (F)lavor Text
+	'e': [CardLib.get_edition_string, FilterType.ALPHABETIC, null], # (E)dition
+	'r': [CardLib.get_rarity_string, FilterType.ALPHABETIC, null], # (R)arity
+	'g': [CardLib.get_gender_string, FilterType.ALPHABETIC, null], # (G)ender
+	
+	'd': [CardLib.get_define_strings, FilterType.ALPHABETIC_LIST, CardLib.has_defines], # (D)efining Types
+	'a': [CardLib.get_artist_strings, FilterType.ALPHABETIC_LIST, null], # (A)rtist Name
+	# CardLib.get_defines(i).size()
+	
+	'n': [CardLib.get_number, FilterType.NUMERIC, null], # Local (N)umber
+	'en': [CardLib.get_edition, FilterType.NUMERIC, null],
+	'rn': [CardLib.get_rarity_priority, FilterType.NUMERIC, null],
+	'tc': [CardLib.get_total_cost, FilterType.NUMERIC, CardLib.has_cost], # (T)otal (C)ost
+	'ac': [CardLib.get_action_cost, FilterType.NUMERIC, CardLib.has_cost], # (A)ction (C)ost
+	'gc': [CardLib.gp_cost, FilterType.NUMERIC, CardLib.has_cost], # Total (G)P (C)ost
+	# Highest GP Cost? Lowest GP Cost?
+	'mc': [CardLib.get_male_cost, FilterType.NUMERIC, CardLib.has_cost], # (M)ale GP (C)ost
+	'fc': [CardLib.get_female_cost, FilterType.NUMERIC, CardLib.has_cost],
+	'hc': [CardLib.get_herm_cost, FilterType.NUMERIC, CardLib.has_cost],
+	'oc': [CardLib.get_other_cost, FilterType.NUMERIC, CardLib.has_cost],
+	'sp': [CardLib.get_stamina, FilterType.NUMERIC, CardLib.has_furre_stats], # (S)tamina
+	'pe': [func(i):return CardLib.get_pleasure(i).max(), FilterType.NUMERIC, CardLib.has_furre_stats], # Highest (PE)
+	'mp': [CardLib.get_male_pleasure, FilterType.NUMERIC, CardLib.has_furre_stats], # (M)ale (P)leasuring Experience
+	'fp': [CardLib.get_female_pleasure, FilterType.NUMERIC, CardLib.has_furre_stats],
+	'hp': [CardLib.get_herm_pleasure, FilterType.NUMERIC, CardLib.has_furre_stats],
+	'op': [CardLib.get_other_pleasure, FilterType.NUMERIC, CardLib.has_furre_stats],
+	'de': [CardLib.get_bonus_to_deck_size, FilterType.NUMERIC, CardLib.is_owner],
+	'ca': [CardLib.get_cards_in_starting_hand, FilterType.NUMERIC, CardLib.is_owner],
+	'ma': [CardLib.get_maximum_cards_in_hand, FilterType.NUMERIC, CardLib.is_owner],
+	'st': [CardLib.get_max_stamina_bonus, FilterType.NUMERIC, CardLib.is_owner],
+	'tu': [CardLib.get_ap_per_turn, FilterType.NUMERIC, CardLib.is_owner],
+	'dr': [CardLib.get_ap_to_draw, FilterType.NUMERIC, CardLib.is_owner],
+	'sw': [CardLib.get_ap_to_swing, FilterType.NUMERIC, CardLib.is_owner],
+	'pu': [CardLib.get_ap_to_put, FilterType.NUMERIC, CardLib.is_owner],
+	
+	'co': [func(i):return CardLib.get_alts(i).size(), FilterType.NUMERIC, null],
+}
 
-# Capture [k:glyph c:comparator v:value]
-## Number-Based filters
-const REGEX_NUMERIC_PATTERN := "(^(?<k>[-~]?%s)[a-zA-Z]*(?<c>[<>=]|(<=)|(>=)|(=<)|(=>))(?<v>[0-9]+)$)"
-const REGEX_NUMERIC_GLYPHS :Array = [ # Not PackedStringArray - then we'd have to convert to Array and back
-	"de", # Bonus to (De)ck Size
-	"ca", # (Ca)rds in Starting Hand
-	"ma", # (Ma)ximum Cards in Hand
-	"st", # Max (St)amina Bonus
-	"tu", # AP per (T)urn
-	"dr", # AP to (Dr)aw a Card
-	"sw", # AP to (Sw)ing with a Furre
-	"pu", # AP to (Pu)t Out with a Furre
-	#"gpt", # Shortcut: (T)otal of all (GP) Costs
-	#"pet", # Shortcut: (T)otal of all (PE) Values
-	"gp", # Shortcut: All (GP) Costs
-	"pe", # Shortcut: All (PE) Values - <Any> - Total
-	"mp", # (M)ale (P)leasuring Experience
-	"fp",
-	"hp",
-	"op",
-	"n", # Local (N)umber
-	"gn", # (G)lobal Number
-	"ac", # (A)ction Cost
-	"mc", # (M)ale GP Cost
-	"fc",
-	"hc",
-	"oc",
-	"sp", # (S)tamina
-	"c", # (C)opies ` Returns cards whose number of copies from the same 'base' compare to <v>
-	"d", # (D)efines ` Returns cards who number of defining types compare to <v>
-	"en", # (E)dition Index
-	"rn" # (R)arity Index
-	]
+# ^ Sort (Maybe doesn't make too much sense as a pre-code...)
+# ~ Or
+# +
+# -
+# -~ Exlusive-Or (Cards that only match one, but no more, of filters using it)
+# # Count? (Or just have a number somewhere that lists all cards in bank, which will accomplish the same thing)
 
+# >
+# >=
+# =
+# <=
+# <
 
+## A smart man would've simply named the buttons after the tags instead. Alas.
 const button_filters := {
-	'Name': { 'Key': 'c', 'Value': 'get_card_name' },
-	'ActionCost': { 'Key': 'ac', 'Value': 'get_action_cost' },
-	'MaleCost': { 'Key': 'mc', 'Value': 'get_male_cost' },
+	'Name': 'c',
+	'Type': 't',
+	'Edition': 'e',
+	'Skill': 's',
+	'Flavor': 'f',
+	'Genders': 'g',
 	
-	'Stamina': { 'Key': 'sp', 'Value': 'get_stamina' },
-	'MalePE': { 'Key': 'mp', 'Value': 'get_male_pleasure' },
-	'FemalePE': { 'Key': 'fp', 'Value': 'get_female_pleasure' },
-	'HermPE': { 'Key': 'hp', 'Value': 'get_herm_pleasure' },
-	'OtherkinPE': { 'Key': 'op', 'Value': 'get_other_pleasure' },
+	'Artist': 'a',
+	'Define': 'd',
 	
-	'Genders': { 'Key': 'g', 'Value': 'get_gender' },
-	'DeckBonus': { 'Key': 'de', 'Value': 'get_bonus_to_deck_size' },
-	'StartHand': { 'Key': 'ca', 'Value': 'get_cards_in_starting_hand' },
-	'MaxHand': { 'Key': 'ma', 'Value': 'get_maximum_cards_in_hand' },
-	'MaxStamina': { 'Key': 'st', 'Value': 'get_max_stamina_bonus' },
-	'TurnAction': { 'Key': 'tu', 'Value': 'get_ap_per_turn' },
-	'DrawAction': { 'Key': 'dr', 'Value': 'get_ap_to_draw' },
-	'SwingAction': { 'Key': 'sw', 'Value': 'get_ap_to_swing' },
-	'PutAction': { 'Key': 'pu', 'Value': 'get_ap_to_put' },
+	'ActionCost': 'ac',
+	'MaleCost': 'mc',
+	'FemaleCost': 'fc',
+	'HermCost': 'hc',
+	'OtherCost': 'oc',
 	
-	'Type': { 'Key': 't', 'Value': 'get_type_string' },
-	'Define': { 'Key': 'd', 'Value': 'get_define_strings' },
-	'Edition': { 'Key': 'e', 'Value': 'get_edition_string' },
-	'Skill': { 'Key': 's', 'Value': 'get_skill_string' },
-	'Flavor': { 'Key': 'f', 'Value': 'get_flavor' },
-	'Artist': { 'Key': 'a', 'Value': 'get_artist_string' },
-	'Number': { 'Key': 'n', 'Value': 'get_number' },
+	'Stamina': 'sp',
+	'MalePE': 'mp',
+	'FemalePE': 'fp',
+	'HermPE': 'hp',
+	'OtherkinPE': 'op',
+	
+	'DeckBonus': 'de',
+	'StartHand': 'ca',
+	'MaxHand': 'ma',
+	'MaxStamina': 'st',
+	'TurnAction': 'tu',
+	'DrawAction': 'dr',
+	'SwingAction': 'sw',
+	'PutAction': 'pu',
+	
+	'Number': 'n',
 }
 
 @onready var dynagrid := $DynamicGrid
@@ -115,6 +138,8 @@ func _ready() -> void:
 	CardTotal.text = str(LAST_CARD-1)
 	
 	var filter = $Filters/Filter
+	filter.bank = self
+	filter.removed.connect(_filter_removed.bind(filter))
 	filter.became_empty.connect(_filter_empty.bind(filter))
 	filter.became_valid_filter.connect(_filter_valid.bind(filter))
 	filter.changed.connect(_filter_changed.bind(filter))
@@ -122,24 +147,32 @@ func _ready() -> void:
 	## Button Filters on the Card View
 	for x in big_view.get_child(0).get_children():
 		if x is Button:
-			x.pressed.connect(_button_filter_press.bind(str(x.name)))
+			x.pressed.connect(_button_filter_press.bind(x))
 		else:
 			## I'm getting lazier and lazier
 			for y in x.get_children():
 				if y is Button:
-					y.pressed.connect(_button_filter_press.bind(str(y.name)))
+					y.pressed.connect(_button_filter_press.bind(y))
+	big_view.get_child(0).button_created.connect(func(btn): 
+		btn.pressed.connect(_button_filter_press.bind(btn))
+	)
 
 
 func resize_grid() -> void:
 	var filters_size = filterbox.get_child_count() * 35.0
+	
 	dynagrid.position.y = filters_size
-	dynagrid.size.y = size.y - filters_size
-	dynagrid.reset_scroll()
+	
+	var dynasize = dynagrid.size
+	dynasize.y = size.y - filters_size
+	dynagrid.resize(dynasize)
 
 
 func create_filter() -> void:
 	var new_filter = preload('uid://n7i4ny7kw54r').instantiate()
+	new_filter.bank = self
 	filterbox.add_child(new_filter)
+	new_filter.removed.connect(_filter_removed.bind(new_filter))
 	new_filter.became_empty.connect(_filter_empty.bind(new_filter))
 	new_filter.became_valid_filter.connect(_filter_valid.bind(new_filter))
 	new_filter.changed.connect(_filter_changed.bind(new_filter))
@@ -161,8 +194,29 @@ func _filter_valid(filter) -> void:
 
 
 func _filter_changed(filter) -> void:
-	filters[filter] = [filter.pre, filter.tag, filter.op, Tool.scrub(filter.param), filter.alpha]
+	var tag = filter.tag
+	
+	if not tag in FILTERS:
+		filters.erase(filter)
+		apply_filters()
+		return
+	
+	var type = FILTERS[tag][1]
+	filter.set_type(type)
+	
+	var pre = filter.pre
+	#if pre == '@':
+		#pass
+	
+	filters[filter] = [pre, tag, filter.op, Tool.scrub(filter.param)]
 	apply_filters()
+
+
+func _filter_removed(filter) -> void:
+	if filter in filters:
+		filters.erase(filter)
+		_filter_empty(filter)
+		apply_filters()
 
 
 func _entry_created(entry:Control, _data_index:int, atlas_image) -> void:
@@ -189,7 +243,7 @@ func card_mouse_entered(card:TextureRect) -> void:
 	if big_view != null:
 		var hover_global = cards[ dynagrid.dataindex(card) ]
 		big_view.texture = load( CardLib.get_path_to_art( hover_global ) )
-		big_view.get_child(0).global = hover_global
+		big_view.get_child(0).set_global(hover_global)
 
 
 func card_gui_input(event:InputEvent, trect:TextureRect) -> void:
@@ -204,6 +258,7 @@ func card_gui_input(event:InputEvent, trect:TextureRect) -> void:
 			## Middle Mouse - Debug Print whatever I wanted to see today
 			elif event.button_index == 3:
 				print( cards[ dynagrid.dataindex(trect) ] )
+				#print( dynagrid.dataindex(trect) )
 		
 		else:
 			## Left Mouse - Add to Deck (if we didn't drag the scroll bar)
@@ -222,188 +277,167 @@ func apply_filters() -> void:
 		var or_match := false
 		
 		for f in filters.values():
-			var negate := false
-			var or_filter := false
 			
 			var pre :String = f[0]
 			var key :String = f[1]
+			var text :String = f[3]
+			var check = FILTERS[key][2]
+			
+			var negate := false
+			var or_filter := false
 			
 			## Negate
 			if pre == "-":
 				negate = true
 			
+			if check:
+				## Empty Negate filters mean "Exclude anything that passes the first check"
+				if negate and text == '':
+					if check.call(i):
+						add = false
+						continue
+					else:
+						continue
+				if not check.call(i):
+					add = false
+					continue
+			
+			## Sort - only cares about excluding non-applicable cards, so continue right now
+			if pre == '^' or pre == 'v':
+				continue
+			
 			## Option
-			if pre == "~":
+			elif pre == "~":
 				or_cond = true
 				or_filter = true
 			
 			## Alphabetical Filter
-			if f[4] == 0:
-				
-				var find :int = -1
-				var text :String = f[3]
-				if text.length() == 0:
-					continue
-				
-				match key:
-					"c": find = Tool.scrub(CardLib.get_card_name(i)).find(text)
-					"a": find = Tool.scrub(CardLib.get_artist_string(i)).find(text)
-					"t": find = Tool.scrub(CardLib.get_type_string(i)).find(text)
-					"d": find = CardLib.get_define_strings(i).map(
-						func (x:String) -> int:
-							return Tool.scrub(x).find(text)).max() if CardLib.has_defines(i) else -1
-					"s": find = Tool.scrub(CardLib.get_skill_string(i)).find(text)
-					"f": find = Tool.scrub(CardLib.get_flavor(i)).find(text)
-					#"g": find = "gender":if CardLib.get_gender(i) != f[1]: add = false
-					"g":
-						## This on is a doozy
-						#var gender_id = CardLib.get_gender(i)
-						var gender_string = CardLib.get_gender_string(i)
-						# Presume the search is for "Male" cards...
-						if text[0] == 'm':
-							## We don't want to include "feMALE" cards by mistake...
-							if gender_string.find('female') != -1:
-								## The only case where male and female are in the same string is where male- exists.
-								find = -1 if not gender_string.find('male-') == 0 else 0
-							else:
-								find = gender_string.find(text)
-						else:
-							find = gender_string.find(text)
-					"e": find = Tool.scrub(CardLib.get_edition_string(i)).find(text)
-					"r": find = Tool.scrub(CardLib.get_rarity_string(i)).find(text)
-					_: find = -1
-				
-				if or_filter:
-					if find != -1:
-						or_match = true
-					continue
-				
-				if find != -1:
-					if negate:
-						add = false
-					continue
-				if not negate:
-					add = false
+			var find :int = -1
+			if text.length() == 0:
 				continue
 			
-			## Numerical Filter
-			var num := 0
-			var con :String = f[2]
-			var val :int = int(f[3])
+			var method = FILTERS[key][0]
+			var type = FILTERS[key][1]
 			
-			## Find the number to compare to
-			match key:
-				"n": num = CardLib.get_number(i)
-				"gn": num = i
-				"ac": num = CardLib.get_action_cost(i)
-				"sp":
-					## Even if this is negated or optioned, we want to exclude non-furres with this filter
-					if not CardLib.has_furre_stats(i): add = false; continue
-					num = CardLib.get_stamina(i)
-				"en": num = CardLib.get_edition(i)
-				"rn": num = CardLib.get_rarity_priority(i)
-				## GP Cost
-				"gp": num = CardLib.get_gender_cost(i).max()
-				"mc": num = CardLib.get_male_cost(i)
-				"fc": num = CardLib.get_female_cost(i)
-				"hc": num = CardLib.get_herm_cost(i)
-				"oc": num = CardLib.get_other_cost(i)
-				## Pleasure
-				"pe":
-					if not CardLib.has_furre_stats(i): add = false; continue
-					num = CardLib.get_pleasure(i).max()
-				"mp":
-					if not CardLib.has_furre_stats(i): add = false; continue
-					num = CardLib.get_male_pleasure(i)
-				"fp":
-					if not CardLib.has_furre_stats(i): add = false; continue
-					num = CardLib.get_female_pleasure(i)
-				"hp":
-					if not CardLib.has_furre_stats(i): add = false; continue
-					num = CardLib.get_herm_pleasure(i)
-				"op":
-					if not CardLib.has_furre_stats(i): add = false; continue
-					num = CardLib.get_other_pleasure(i)
-				# Copies/Alts
-				"co": num = CardLib.get_alts(i).size()
-				# Defines
-				#"de": num = CardLib.get_defines(i).size()
-				## Owner
-				"de":
-					if not CardLib.is_owner(i): add = false; continue
-					num = CardLib.get_bonus_to_deck_size(i)
-				"ca":
-					if not CardLib.is_owner(i): add = false; continue
-					num = CardLib.get_cards_in_starting_hand(i)
-				"ma":
-					if not CardLib.is_owner(i): add = false; continue
-					num = CardLib.get_maximum_cards_in_hand(i)
-				"st":
-					if not CardLib.is_owner(i): add = false; continue
-					num = CardLib.get_max_stamina_bonus(i)
-				"tu":
-					if not CardLib.is_owner(i): add = false; continue
-					num = CardLib.get_ap_per_turn(i)
-				"dr":
-					if not CardLib.is_owner(i): add = false; continue
-					num = CardLib.get_ap_to_draw(i)
-				"sw":
-					if not CardLib.is_owner(i): add = false; continue
-					num = CardLib.get_ap_to_swing(i)
-				"pu":
-					if not CardLib.is_owner(i): add = false; continue
-					num = CardLib.get_ap_to_put(i)
+			var operator_check := false
 			
-			# "Or" conditions don't apply to the "add" var
-			var pre_check_add_for_or := add
-			
-			if negate:
-				match con:
-					"<": if num < val: add = false
-					">": if num > val: add = false
-					"=": if num == val: add = false
-					"<=","=<": if num <= val: add = false
-					">=","=>": if num >= val: add = false
-			else:
-				match con:
-					"<": if num >= val: add = false
-					">": if num <= val: add = false
-					"=": if num != val: add = false
-					"<=","=<": if num > val: add = false
-					">=","=>": if num < val: add = false
+			match type:
+				
+				FilterType.ALPHABETIC:
+					find = ( Tool.scrub( method.call(i) ) ).find(text)
+				
+				FilterType.ALPHABETIC_LIST:
+					var list = method.call(i)
+					find = list.map(
+						func (x:String) -> int: return Tool.scrub(x).find(text)
+							).max() if not list.is_empty() else -1
+				
+				FilterType.CUSTOM:
+					find = method.call(i, text)
+				
+				FilterType.NUMERIC:
+					operator_check = true
+					
+					## Numerical Filter
+					var num :int = method.call(i)
+					var con :String = f[2]
+					var val :int = int(f[3])
+					
+					find = 1
+					if negate:
+						match con:
+							"<": if num < val: find = -1
+							">": if num > val: find = -1
+							"=": if num == val: find = -1
+							"<=","=<": if num <= val: find = -1
+							">=","=>": if num >= val: find = -1
+					else:
+						match con:
+							"<": if num >= val: find = -1
+							">": if num <= val: find = -1
+							"=": if num != val: find = -1
+							"<=","=<": if num > val: find = -1
+							">=","=>": if num < val: find = -1
 			
 			if or_filter:
-				if add:
+				if find != -1:
 					or_match = true
-				add = pre_check_add_for_or
+				continue
+			
+			if find != -1:
+				if negate:
+					add = false
+				continue
+			if not negate:
+				add = false
+			continue
 		
 		if or_cond and or_match and add:
 			filtered_cards.append(i)
 		elif not or_cond and add:
 			filtered_cards.append(i)
 	
+	for f in filters.values():
+		if f[0] != '^' and f[0] != 'v':
+			continue
+		var method = FILTERS[f[1]][0]
+		var type = FILTERS[f[1]][1]
+		var reverse = f[0] == 'v'
+		if type == FilterType.NUMERIC or type == FilterType.ALPHABETIC:
+			filtered_cards.sort_custom(func(a,b):
+				if reverse:
+					return method.call(a) > method.call(b)
+				return method.call(a) < method.call(b)
+				)
+		## Sort based on whatever is first
+		elif type == FilterType.ALPHABETIC_LIST:
+			filtered_cards.sort_custom(func(a,b):
+				var am = method.call(a)
+				#if am.size() == 0: return reverse
+				var bm = method.call(b)
+				#if bm.size() == 0: return not reverse
+				if reverse:
+					return am[0] > bm[0]
+				return am[0] < bm[0]
+				)
+	
 	cards = filtered_cards
 	dynagrid.set_card_bank(0, cards.size())
 	CardTotal.text = str(cards.size())
 
 
-func _on_filter_help_pressed() -> void:
+func _press_help() -> void:
 	var tscn = load('uid://c2mfs1p8piec6').instantiate()
 	tscn.get_child(1).pressed.connect(func (): tscn.queue_free())
 	get_tree().get_root().add_child(tscn)
 
 
-func _button_filter_press(bname: String) -> void:
-	#print(button_filters[bname])
-	var empty_filter = $Filters.get_children()[-1]
-	var clib = CardLib.new()
+func _button_filter_press(node: Button) -> void:
+	var bname = str(node.name)
+	var split = bname.split('-')
+	var splitidx := 0
+	printt(bname, split)
+	if split.size() != 1:
+		splitidx = int(split[1])
+	var left_name = split[0]
+	
 	var global = big_view.get_child(0).global
-	var val = clib.call(button_filters[bname].Value, global)
+	var key = button_filters[left_name]
+	
+	var val = FILTERS[key][0].call(global)
+	var pre = '+'
+	
 	if val is Array:
-		val = val[0]
+		if not val.is_empty():
+			val = val[splitidx]
+		else:
+			pre = '-'
+			val = ''
 	if not val is String:
 		val = str(val)
-	empty_filter.set_all('+', button_filters[bname].Key, '=', val)
+	
+	var empty_filter = $Filters.get_children()[-1]
+	empty_filter.set_all(pre, key, '=', val)
 
 
 func add_filter(a, b, c ,d) -> void:

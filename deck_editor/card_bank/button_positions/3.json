@@ -1,0 +1,132 @@
+{
+	"ActionCost": {
+		"Pos": "(252.0, 21.0)",
+		"Show": true,
+		"Size": "(25.0, 25.0)"
+	},
+	"Artist": {
+		"Pos": "(19.0, 364.0)",
+		"Show": true,
+		"Size": "(238.0, 27.0)"
+	},
+	"DeckBonus": {
+		"Pos": "(6.0, -36.0)",
+		"Show": false,
+		"Size": "(56.0, 28.0)"
+	},
+	"Define": {
+		"Pos": "(59.0, 45.0)",
+		"Show": true,
+		"Size": "(49.0, 14.0)"
+	},
+	"DrawAction": {
+		"Pos": "(66.0, -5.0)",
+		"Show": false,
+		"Size": "(56.0, 31.0)"
+	},
+	"Edition": {
+		"Pos": "(264.0, 372.0)",
+		"Show": true,
+		"Size": "(19.0, 20.0)"
+	},
+	"FemalePE": {
+		"Pos": "(1.0, 67.0)",
+		"Show": true,
+		"Size": "(41.0, 20.0)"
+	},
+	"Flavor": {
+		"Pos": "(29.0, 327.0)",
+		"Show": true,
+		"Size": "(241.0, 34.0)"
+	},
+	"Furre": {
+		"Pos": "(15.0, 56.0)",
+		"Show": false,
+		"Size": "(47.0, 148.0)"
+	},
+	"GenderCost": {
+		"Pos": "(263.0, 47.0)",
+		"Show": true,
+		"Size": "(15.0, 17.0)"
+	},
+	"Genders": {
+		"Pos": "(190.0, -245.0)",
+		"Show": false,
+		"Size": "(67.0, 16.0)"
+	},
+	"HermPE": {
+		"Pos": "(1.0, 95.0)",
+		"Show": true,
+		"Size": "(41.0, 20.0)"
+	},
+	"MalePE": {
+		"Pos": "(1.0, 39.0)",
+		"Show": true,
+		"Size": "(41.0, 20.0)"
+	},
+	"MaxHand": {
+		"Pos": "(129.0, -35.0)",
+		"Show": false,
+		"Size": "(56.0, 29.0)"
+	},
+	"MaxStamina": {
+		"Pos": "(189.0, -36.0)",
+		"Show": false,
+		"Size": "(58.0, 30.0)"
+	},
+	"Name": {
+		"Pos": "(21.0, 21.0)",
+		"Show": true,
+		"Size": "(169.0, 20.0)"
+	},
+	"Number": {
+		"Pos": "(250.0, 393.0)",
+		"Show": true,
+		"Size": "(31.0, 10.0)"
+	},
+	"OtherkinPE": {
+		"Pos": "(1.0, 123.0)",
+		"Show": true,
+		"Size": "(41.0, 20.0)"
+	},
+	"Owner": {
+		"Pos": "(23.0, 292.0)",
+		"Show": false,
+		"Size": "(255.0, 79.0)"
+	},
+	"PutAction": {
+		"Pos": "(190.0, -2.0)",
+		"Show": false,
+		"Size": "(58.0, 26.0)"
+	},
+	"Skill": {
+		"Pos": "(29.0, 244.0)",
+		"Show": true,
+		"Size": "(242.0, 81.0)"
+	},
+	"Stamina": {
+		"Pos": "(1.0, 4.0)",
+		"Show": true,
+		"Size": "(41.0, 20.0)"
+	},
+	"StartHand": {
+		"Pos": "(66.0, -36.0)",
+		"Show": false,
+		"Size": "(55.0, 29.0)"
+	},
+	"SwingAction": {
+		"Pos": "(128.0, -4.0)",
+		"Show": false,
+		"Size": "(58.0, 29.0)"
+	},
+	"TurnAction": {
+		"Pos": "(5.0, -6.0)",
+		"Show": false,
+		"Size": "(59.0, 31.0)"
+	},
+	"Type": {
+		"Pos": "(26.0, 45.0)",
+		"Show": true,
+		"Size": "(29.0, 14.0)"
+	}
+}

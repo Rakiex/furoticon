@@ -563,37 +563,38 @@ func _press_owner():
 	
 	## Remove Owner
 	deck_owner_cid = -1
-	$Overview/Owner.texture = load("res://IndicationLabelL.png")
+	$Overview/Owner.texture = load("uid://dxyfm0irggcn2")
 	load_deck()
 
 
 func _enter_hidden():
-	$Card.texture = $Overview/Hidden.texture
+	#$Card.texture = $Overview/Hidden.texture
+	return
 
 
 func _press_hidden():
 	if OS.has_feature("web"):
 		
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-			deck_hidden_image = load("res://hidden.jpg")
+			deck_hidden_image = load("uid://s41kvt2kyp21")
 			$Overview/Hidden/Label.text = "Hidden"
 			load_deck()
 			return
 		
-		deck_hidden_image = load("res://backing.jpg")
+		deck_hidden_image = load("uid://blpk6ykqdyyuf")
 		$Overview/Hidden/Label.text = "Backing"
 		load_deck()
 		
 		return
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-		deck_hidden_image = load("res://hidden.jpg")
+		deck_hidden_image = load("uid://s41kvt2kyp21")
 		$Overview/Hidden/Label.text = "Hidden"
 		load_deck()
 		return
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
-		deck_hidden_image = load("res://backing.jpg")
+		deck_hidden_image = load("uid://blpk6ykqdyyuf")
 		$Overview/Hidden/Label.text = "Backing"
 		load_deck()
 		return
